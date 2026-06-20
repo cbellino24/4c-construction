@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 106" role="img" aria-label="4C Construction Logo">
+  <title>4C Construction — Custom Homes &amp; Renovations</title>
+  <defs>
+    <style>
+      .logo-dark { fill: #373938; }
+      .logo-accent { fill: #f67227; }
+      .logo-4c {
+        font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 92px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+      .logo-name {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+      .logo-tagline {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: 0.34em;
+      }
+    </style>
+  </defs>
+  <text class="logo-dark logo-4c" x="0" y="82">4C</text>
+  <rect class="logo-accent" x="250" y="6" width="2" height="94"/>
+  <text class="logo-dark logo-name" x="268" y="54">CONSTRUCTION</text>
+  <text class="logo-accent logo-tagline" x="268" y="96">CUSTOM HOMES &amp; RENOVATIONS</text>
+</svg>
