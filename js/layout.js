@@ -370,7 +370,10 @@
   function resolveHeroImage() {
     var img = body.dataset.heroBg;
     if (!img && S.heroImages) {
-      img = S.heroImages[activeKey] || S.heroImages[preselectedService];
+      img =
+        S.heroImages[activeKey] ||
+        S.heroImages[preselectedService] ||
+        S.heroImages.home;
     }
     return img;
   }
@@ -434,21 +437,37 @@
     }
   }
 
+  function mountHeader() {
+    return headerTopHtml() + headerBrandHtml() + headerNavHtml();
+  }
+
+  function mountPageHeroShell() {
+    var topMount = document.getElementById("site-top");
+    if (!topMount || !topMount.parentNode) return;
+
+    var shell = document.createElement("div");
+    shell.className =
+      "hero-shell hero-shell--page" + (heroType === "simple" ? " hero-shell--simple" : "");
+    shell.id = "page-hero-shell";
+
+    topMount.parentNode.insertBefore(shell, topMount);
+    shell.appendChild(topMount);
+    topMount.innerHTML = mountHeader();
+    shell.insertAdjacentHTML(
+      "beforeend",
+      heroType === "simple" ? simplePageHeroHtml() : servicePageHeroHtml()
+    );
+    applyHeroBackground(shell);
+  }
+
   var topMount = document.getElementById("site-top");
   if (topMount) {
     if (isHome) {
-      topMount.innerHTML =
-        headerTopHtml() + headerBrandHtml() + headerNavHtml();
+      topMount.innerHTML = mountHeader();
       var homeShell = document.getElementById("home");
       if (homeShell) applyHeroBackground(homeShell);
     } else {
-      topMount.className = "hero-shell hero-shell--page" + (heroType === "simple" ? " hero-shell--simple" : "");
-      topMount.innerHTML =
-        headerTopHtml() +
-        headerBrandHtml() +
-        headerNavHtml() +
-        (heroType === "simple" ? simplePageHeroHtml() : servicePageHeroHtml());
-      applyHeroBackground(topMount);
+      mountPageHeroShell();
     }
   }
 
