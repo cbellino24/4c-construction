@@ -39,33 +39,35 @@
     }
   };
 
+  var CONSULT_TITLE = "Ready to Start Your Next Project?";
+
   var CONSULT = {
     kitchen: {
-      title: "Schedule Your Kitchen Consultation",
-      body: "Tell us how you use your kitchen today and what you want to change. We will walk your space, discuss options, and provide a clear scope and estimate — with no pressure."
+      title: CONSULT_TITLE,
+      body: "Tell us how you use your kitchen today and what you want to change. We will walk your space, discuss options, and provide a clear scope for your project."
     },
     bathroom: {
-      title: "Schedule Your Bathroom Consultation",
+      title: CONSULT_TITLE,
       body: "Whether you need a full remodel, a tub-to-shower conversion, or an accessible update, we will help you plan a bathroom that fits your home and your budget."
     },
     basement: {
-      title: "Schedule Your Basement Consultation",
+      title: CONSULT_TITLE,
       body: "Not sure what is possible in your basement? We will evaluate the space, talk through layout ideas, and outline a realistic path from unfinished to fully livable."
     },
     "custom-homes": {
-      title: "Schedule Your Custom Home Consultation",
-      body: "If you are exploring a lot, a floor plan, or a timeline for building, we are happy to sit down and answer your questions before you commit to anything."
+      title: CONSULT_TITLE,
+      body: "If you are exploring a lot, a floor plan, or a timeline for building, we are happy to sit down and answer your questions about your custom home project."
     },
     "whole-home": {
-      title: "Schedule Your Remodeling Consultation",
+      title: CONSULT_TITLE,
       body: "Every whole-home project starts with a conversation about priorities — what to tackle first, what can wait, and what will make the biggest difference in how you live."
     },
     decks: {
-      title: "Schedule Your Deck Consultation",
+      title: CONSULT_TITLE,
       body: "We will review your backyard, discuss size and materials, and help you plan an outdoor space your family will actually use."
     },
     default: {
-      title: "Schedule Your In-Home Consultation",
+      title: CONSULT_TITLE,
       body: "Call <a href=\"tel:+14026161814\">(402) 616-1814</a> or request service online. We respond promptly and keep the process straightforward."
     }
   };
@@ -133,10 +135,14 @@
       var h2c = consult.querySelector("h2");
       var pc = consult.querySelector("p");
       if (h2c) h2c.textContent = c.title;
-      if (pc && pc.textContent.indexOf("4C Construction specializes in custom home") >= 0) {
-        pc.innerHTML = c.body;
-      }
+      if (pc) pc.innerHTML = c.body;
     }
+
+    document.querySelectorAll(".ip-intro__cta a, .ip-consult a.btn").forEach(function (btn) {
+      if (/consultation/i.test(btn.textContent) && !/Request Service/i.test(btn.textContent)) {
+        btn.innerHTML = '<span class="btn__icon" aria-hidden="true">&#9733;</span> Request Service';
+      }
+    });
 
     var processSub = document.querySelector(".ip-process .section-sub");
     if (processSub && processSub.textContent.indexOf("clear and organized process") >= 0) {

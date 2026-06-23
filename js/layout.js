@@ -140,9 +140,9 @@
 
   function heroFactsHtml() {
     var facts = (S.heroFacts && (S.heroFacts[preselectedService] || S.heroFacts.default)) || [
-      "30+ Years of Trusted Experience",
-      "Licensed, Insured & Bonded",
-      "5.0 Google Rating"
+      "30+ Years of Experience",
+      "Fully Licensed & Insured",
+      "Quality Workmanship"
     ];
     return facts.map(function (fact) {
       return "<p>" + fact + "</p>";
@@ -176,14 +176,20 @@
     );
   }
 
+  function headerReviewsHtml(extraClass) {
+    return (
+      '<div class="header-reviews' + (extraClass ? " " + extraClass : "") + '" aria-label="5 star rating">' +
+      '<span class="header-reviews__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' +
+      '<span class="header-reviews__text">Highly Rated by Omaha Homeowners</span></div>'
+    );
+  }
+
   function headerTopHtml() {
     var ctaHref = isHome ? "#request-service" : pathPrefix() + "contact-us.html";
     return (
       '<div class="header-row header-row--top">' +
       '<div class="container header-row__inner">' +
-      '<div class="header-reviews" aria-label="5 star rating">' +
-      '<span class="header-reviews__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' +
-      '<span class="header-reviews__text">5-Star Rated Contractor</span></div>' +
+      headerReviewsHtml() +
       '<a href="' + ctaHref + '" class="btn btn--primary">' +
       '<span class="btn__icon" aria-hidden="true">&#9733;</span> Request Service</a></div></div>'
     );
@@ -196,8 +202,7 @@
       '<p class="header-location"><strong>Serving Omaha, NE &amp; Surrounding Areas</strong></p>' +
       '<div class="site-logo-wrap">' +
       '<a href="' + pathPrefix() + 'index.html" class="site-logo" aria-label="' + S.name + ' Home">' +
-      '<img src="' + pathPrefix() + S.logo + '" alt="' + S.name + ' Logo" width="280" height="29"></a>' +
-      (S.motto ? '<p class="header-motto">' + S.motto + "</p>" : "") +
+      '<img src="' + pathPrefix() + S.logo + '" alt="' + S.name + ' Logo" width="280" height="29" decoding="async" fetchpriority="high"></a>' +
       "</div>" +
       '<a href="tel:' + S.phoneTel + '" class="header-phone"><strong>' + S.phone + "</strong></a>" +
       "</div></div>"
@@ -211,6 +216,7 @@
       '<div class="nav-sticky-sentinel" id="nav-sticky-sentinel" aria-hidden="true"></div>' +
       '<header class="site-header" id="site-header">' +
       '<div class="container">' +
+      headerReviewsHtml("site-header__sticky-reviews") +
       '<nav class="main-nav" id="main-nav" aria-label="Main navigation">' +
       '<ul class="main-nav__list">' + navHtml() + "</ul></nav>" +
       '<a href="' + ctaHref + '" class="site-header__sticky-cta">' +
@@ -283,7 +289,7 @@
       '<section class="ip-review-band section section--dark">' +
       '<div class="container">' +
       '<h2 class="ip-review-band__title section-title section-title--light">30+ Years of Trusted Construction Experience</h2>' +
-      '<p class="ip-review-band__sub">Have a project in mind? We offer free in-home consultations across the Omaha Metro.</p>' +
+      '<p class="ip-review-band__sub">Have a project in mind? Contact us to discuss your custom home or remodeling project across the Omaha Metro.</p>' +
       '<p class="ip-review-band__phone"><a href="tel:' + S.phoneTel + '">' + S.phone + "</a></p>" +
       '<blockquote class="review-card ip-review-band__quote">' +
       '<div class="review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
@@ -295,10 +301,10 @@
       '<div class="container about-block__grid">' +
       '<div class="about-block__content">' +
       "<h3>" + S.name + "</h3>" +
-      '<p class="about-block__subtitle"><strong>Omaha&rsquo;s Trusted Custom Home &amp; Remodeling Contractor</strong></p>' +
+      '<p class="about-block__subtitle"><strong>Custom Home Builder &amp; Remodeling Contractor Serving Omaha, Nebraska</strong></p>' +
       "<p>" + S.footerTagline + "</p>" +
-      "<p>From proper framing and waterproofing to precision finish work, our licensed, insured, and bonded team delivers clean job sites, clear communication, and results built to last.</p>" +
-      '<a href="about-us.html" class="btn btn--primary"><span class="btn__icon" aria-hidden="true">&#9733;</span> About Our Company</a>' +
+      "<p>Our team works closely with homeowners from planning and design through final completion, delivering quality construction, personalized service, and hands-on owner involvement throughout every project.</p>" +
+      '<a href="about-us.html" class="btn btn--primary"><span class="btn__icon" aria-hidden="true">&#9733;</span> Learn More About 4C Construction</a>' +
       "</div>" +
       '<div class="about-block__image" style="background-image:url(\'https://4c-omaha.com/wp-content/uploads/2025/03/house-complete-1-min.jpg\')"></div>' +
       "</div></section>"
@@ -331,6 +337,7 @@
       "<div><h4>Our Services</h4><hr><ul class=\"city-list\">" + footerServicesHtml() + "</ul></div>" +
       "<div><h4>Contact Us</h4><hr>" +
       '<p class="footer-block__tagline">' + S.footerTagline + "</p>" +
+      (S.motto ? '<p class="footer-block__motto"><em>' + S.motto + "</em></p>" : "") +
       '<p class="footer-block__phone"><a href="tel:' + S.phoneTel + '">' + S.phone + "</a></p>" +
       '<p class="footer-block__email"><a href="mailto:' + S.email + '">' + S.email + "</a></p>" +
       '<p class="footer-block__address">' + S.address + "<br>" + S.cityState + "</p>" +
@@ -365,6 +372,37 @@
       '<a href="contact-us.html" class="mobile-bar__item mobile-bar__item--cta">Request Service</a>' +
       '<a href="mailto:' + S.email + '" class="mobile-bar__item">Email Us</a></div>'
     );
+  }
+
+  function floatActionsHtml() {
+    var contactHref = isHome ? "#request-service" : pathPrefix() + "contact-us.html";
+    return (
+      '<div class="float-actions" id="float-actions">' +
+      '<button type="button" class="float-actions__toggle" id="float-actions-toggle" aria-expanded="false" aria-controls="float-actions-menu" aria-label="Open contact menu">' +
+      '<span class="float-actions__toggle-icon" aria-hidden="true">&#9733;</span>' +
+      '<span class="float-actions__toggle-label">Contact</span></button>' +
+      '<nav class="float-actions__menu" id="float-actions-menu" aria-label="Quick contact actions" hidden>' +
+      '<a href="tel:' + S.phoneTel + '" class="float-actions__item"><span class="float-actions__icon" aria-hidden="true">&#9742;</span>Call Us</a>' +
+      '<a href="sms:' + S.phoneTel + '" class="float-actions__item"><span class="float-actions__icon" aria-hidden="true">&#9993;</span>Text Us</a>' +
+      '<a href="' + pathPrefix() + 'reviews.html" class="float-actions__item"><span class="float-actions__icon" aria-hidden="true">&#9733;</span>Read Reviews</a>' +
+      '<a href="' + contactHref + '" class="float-actions__item float-actions__item--cta"><span class="float-actions__icon" aria-hidden="true">&#9733;</span>Request Service</a>' +
+      '<a href="mailto:' + S.email + '" class="float-actions__item"><span class="float-actions__icon" aria-hidden="true">&#9993;</span>Email Us</a>' +
+      '<button type="button" class="float-actions__item float-actions__item--share" id="float-actions-share"><span class="float-actions__icon" aria-hidden="true">&#8599;</span>Share Us</button>' +
+      '</nav></div>'
+    );
+  }
+
+  function preloadHeroImage() {
+    var img = resolveHeroImage();
+    if (!img) return;
+    var href = pathPrefix() + img;
+    if (document.querySelector('link[rel="preload"][as="image"][href="' + href + '"]')) return;
+    var link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = href;
+    link.setAttribute("fetchpriority", "high");
+    document.head.appendChild(link);
   }
 
   function resolveHeroImage() {
@@ -411,7 +449,7 @@
       video.muted = true;
       video.loop = true;
       video.playsInline = true;
-      video.preload = "auto";
+      video.preload = "metadata";
       video.setAttribute("playsinline", "");
       video.setAttribute("aria-hidden", "true");
       if (img) video.poster = pathPrefix() + img;
@@ -460,6 +498,8 @@
     applyHeroBackground(shell);
   }
 
+  preloadHeroImage();
+
   var topMount = document.getElementById("site-top");
   if (topMount) {
     if (isHome) {
@@ -478,7 +518,7 @@
 
   var bottomMount = document.getElementById("site-bottom");
   if (bottomMount) {
-    bottomMount.innerHTML = footerBlockHtml() + accreditationsHtml() + legalFooterHtml() + mobileBarHtml();
+    bottomMount.innerHTML = footerBlockHtml() + accreditationsHtml() + legalFooterHtml() + mobileBarHtml() + floatActionsHtml();
   }
 
   injectSeoRelated();

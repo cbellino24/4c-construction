@@ -273,4 +273,89 @@
 
     observer.observe(section);
   })();
+
+  (function initFloatActions() {
+    var root = document.getElementById("float-actions");
+    var toggle = document.getElementById("float-actions-toggle");
+    var menu = document.getElementById("float-actions-menu");
+    var shareBtn = document.getElementById("float-actions-share");
+    if (!root || !toggle || !menu) return;
+
+    function setOpen(open) {
+      root.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close contact menu" : "Open contact menu");
+      if (open) {
+        menu.removeAttribute("hidden");
+      } else {
+        menu.setAttribute("hidden", "");
+      }
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!root.classList.contains("is-open"));
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!root.classList.contains("is-open")) return;
+      if (!root.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && root.classList.contains("is-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    menu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    if (shareBtn) {
+      shareBtn.addEventListener("click", function () {
+        var title = (window.SITE && window.SITE.name) || document.title;
+        var url = window.location.href;
+        if (navigator.share) {
+          navigator.share({ title: title, url: url }).catch(function () {});
+          return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () {
+            var original = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<span class="float-actions__icon" aria-hidden="true">&#10003;</span>Link Copied!';
+            setTimeout(function () {
+              shareBtn.innerHTML = original;
+            }, 2000);
+          });
+        }
+      });
+    }
+  })();
+
+  (function initBlogPrint() {
+    var header = document.querySelector(".blog-article__header");
+    if (!header || header.querySelector(".blog-article__print")) return;
+
+    var category = header.querySelector(".blog-article__category");
+    var isGuide = category && /guide/i.test(category.textContent);
+    var label = isGuide ? "Print Guide" : "Print Article";
+
+    var actions = document.createElement("div");
+    actions.className = "blog-article__actions";
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "blog-article__print";
+    btn.innerHTML =
+      '<span class="blog-article__print__icon" aria-hidden="true">&#128438;</span>' + label;
+    btn.addEventListener("click", function () {
+      window.print();
+    });
+
+    actions.appendChild(btn);
+    header.appendChild(actions);
+  })();
 })();

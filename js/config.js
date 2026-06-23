@@ -1,6 +1,6 @@
 window.SITE = {
   name: "4C Construction",
-  tagline: "Custom Homes & Remodeling Built Around Your Vision",
+  tagline: "Custom Homes & Renovations Built to Last",
   motto: "Customer, Cost, Communication & Courtesy",
   phone: "(402) 616-1814",
   phoneTel: "+14026161814",
@@ -13,6 +13,7 @@ window.SITE = {
   googleReviewsUrl: "https://maps.app.goo.gl/k3sm2wsz9d8FAQu99",
   googleRating: "5.0",
   mapEmbedUrl: "https://maps.google.com/maps?q=7901+S+22nd+Ave+Bellevue+NE+68147&output=embed",
+  directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=7901+S+22nd+Ave,+Bellevue,+NE+68147",
   facebookUrl: "https://www.facebook.com/4cconstructionllc/",
   contractorGuideUrl: "selecting-a-contractor.html",
   privacyPolicyUrl: "privacy-policy.html",
@@ -63,13 +64,13 @@ window.SITE = {
   },
   heroFacts: {
     default: [
-      "30+ Years of Trusted Experience",
-      "Licensed, Insured & Bonded",
-      "5.0 Google Rating"
+      "30+ Years of Experience",
+      "Fully Licensed & Insured",
+      "Quality Workmanship"
     ],
     bathroom: [
-      "30+ Years of Trusted Experience",
-      "Licensed & Fully Insured",
+      "30+ Years of Experience",
+      "Fully Licensed & Insured",
       "CAPS Certified Aging-in-Place Specialist"
     ]
   },
@@ -81,8 +82,7 @@ window.SITE = {
     { name: "Gretna, NE", href: "gretna-remodeling-contractor.html" },
     { name: "Elkhorn, NE", href: "elkhorn-remodeling-contractor.html" },
     { name: "Bennington, NE", href: "bennington-remodeling-contractor.html" },
-    { name: "Springfield, NE", href: "contact-us.html" },
-    { name: "Valley, NE", href: "contact-us.html" }
+    { name: "Plattsmouth, NE", href: "contact-us.html" }
   ],
   budgetOptions: [
     "Under $25,000",
