@@ -2269,6 +2269,11 @@ h1, h2, h3, h4 {
   /* Inner page hero */
   .page-hero { padding: 1.25rem 0 0; }
 
+  .page-hero--simple {
+    min-height: 260px;
+    padding: 2.75rem 0 2rem;
+  }
+
   .page-hero__text h1 {
     font-size: clamp(1.35rem, 5.5vw, 1.75rem);
   }
@@ -2460,16 +2465,28 @@ h1, h2, h3, h4 {
 #page-hero-shell > .hero-shell__media,
 #page-hero-shell.hero-shell--animated::after {
   inset: 0;
-  height: auto;
+  height: 100%;
+}
+
+#page-hero-shell + .inner-page > .section:first-child {
+  margin-top: -6px;
+  position: relative;
+  z-index: 2;
 }
 
 .page-hero--simple {
-  padding: 2rem 0 0;
+  padding: 3.25rem 0 2.25rem;
   text-align: center;
+  min-height: clamp(280px, 32vh, 360px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .page-hero--simple__inner {
-  padding-bottom: 1.5rem;
+  padding-bottom: 0;
+  width: 100%;
 }
 
 .page-hero--simple h1 {
